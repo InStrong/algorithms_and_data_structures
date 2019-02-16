@@ -47,7 +47,7 @@ public class Array {
 
     public Integer indexOf(Integer value){
         for (Integer i = 0; i < currentSize; i++) {
-            if(array[i]==value) return i;
+            if(array[i].equals(value)) return i;
         }
 
         return -1;
@@ -69,13 +69,13 @@ public class Array {
     }
 
     public boolean remove(Integer value){
-        return removeByIndex(value);
+        return removeByIndex(indexOf(value));
     }
 
 
     public void fillWithRandomNumbers(){
         for (int i = 0; i < array.length; i++) {
-            array[i]=(int) (Math.random()*100);
+            add((int) (Math.random()*10+128));
         }
     }
 
