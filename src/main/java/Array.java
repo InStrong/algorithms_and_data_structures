@@ -74,16 +74,18 @@ public class Array {
 
 
     public void fillWithRandomNumbers(){
+        currentSize=0;
         for (int i = 0; i < array.length; i++) {
             add((int) (Math.random()*10+128));
         }
+       currentSize=array.length;
     }
 
 
     public void sortBubble(){
 
-        for (int i = 0; i < array.length - 1; i++) {
-            for (int j = 0; j < array.length - 1 - i; j++) {
+        for (int i = 0; i < currentSize - 1; i++) {
+            for (int j = 0; j < currentSize - 1 - i; j++) {
                 if (array[j]>array[j+1]) swap(j,j+1);
             }
         }
@@ -92,9 +94,9 @@ public class Array {
 
     public void sortSelect(){
 
-        for (int i = 0; i < array.length - 1; i++) {
+        for (int i = 0; i < currentSize - 1; i++) {
             int minIndex = i;
-            for (int j = i+1; j < array.length ; j++) {
+            for (int j = i+1; j < currentSize ; j++) {
                 if (array[j]<array[minIndex]) {
                     minIndex=j;
                 }
@@ -106,7 +108,7 @@ public class Array {
 
     public void sortInsert(){
 
-        for (int i = 1; i < array.length; i++) {
+        for (int i = 1; i < currentSize; i++) {
             int temp = array[i];
 
             int in=i;
