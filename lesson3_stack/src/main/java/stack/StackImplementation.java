@@ -34,4 +34,13 @@ public class StackImplementation<E> implements Stack<E> {
     public boolean isEmpty() {
         return size == 0;
     }
+
+    @Override
+    public boolean isFull() {
+        return size == data.length;
+    }
+
+
+
+
 }

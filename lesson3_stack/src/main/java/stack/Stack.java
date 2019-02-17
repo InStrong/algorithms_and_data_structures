@@ -7,6 +7,7 @@ public interface Stack<E> {
     E peek();
 
     int size();
+    boolean isFull();
     boolean isEmpty();
 
 }
