@@ -6,7 +6,11 @@
 
     <groupId>ru.geekbrains</groupId>
     <artifactId>algorithms_and_data_structures</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>Lesson4</module>
+    </modules>
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
