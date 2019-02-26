@@ -1,10 +1,6 @@
 package linkedList.iterator;
 
-
-import linkedList.twoside.TwoSidedLinkedListImpl;
-
 import java.util.LinkedList;
-import java.util.List;
 import java.util.ListIterator;
 
 public class ListIteratorApp {
