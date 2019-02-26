@@ -1,5 +1,10 @@
 package linkedList;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.Spliterator;
+import java.util.function.Consumer;
+
 public class SimpleLinkedListImpl<E> implements LinkedList<E> {
 
     protected Entry<E> firstElement;
@@ -97,5 +102,48 @@ public class SimpleLinkedListImpl<E> implements LinkedList<E> {
     @Override
     public Entry<E> getFirst() {
         return firstElement;
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        return new MyLinkedListIterator();
+    }
+
+    private class MyLinkedListIterator<E> implements Iterator<E> {
+
+        private Entry<E> current;
+
+        public MyLinkedListIterator() {
+            this.current = (Entry<E>) SimpleLinkedListImpl.this.firstElement;
+        }
+
+        public boolean hasNext() {
+            return this.current != null;
+        }
+
+        public E next() {
+            if (!this.hasNext()) {
+                throw new NoSuchElementException();
+            }
+            E value = current.getValue();
+            current = current.getNext();
+            return value;
+        }
+
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
+    }
+
+
+    @Override
+    public void forEach(Consumer<? super E> action) {
+
+
+    }
+
+    @Override
+    public Spliterator<E> spliterator() {
+        return null;
     }
 }
