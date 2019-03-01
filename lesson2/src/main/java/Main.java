@@ -5,12 +5,12 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Array array = new Array(100000);
+        Array2 array = new Array2(100000);
         array.fillWithRandomNumbers();
 
-        Array arr1=new Array(array.array.length);
-        Array arr2=new Array(array.array.length);
-        Array arr3=new Array(array.array.length);
+        Array2 arr1=new Array2(array.array.length);
+        Array2 arr2=new Array2(array.array.length);
+        Array2 arr3=new Array2(array.array.length);
 
         for (int i = 0; i < array.array.length; i++) {
             arr1.add(array.get(i));
