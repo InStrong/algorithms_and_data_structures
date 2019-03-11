@@ -2,7 +2,19 @@ import java.util.Stack;
 
 public class TreeImpl<E extends Comparable<? super E>> implements Tree<E> {
 
-    private Node<E> rootNode;
+    protected Node<E> rootNode;
+    int MAX_DEPTH ;
+    int CURRENT_DEPTH;
+
+    public TreeImpl(int MAX_DEPTH) {
+        this.MAX_DEPTH = MAX_DEPTH;
+    }
+
+
+
+
+
+
 
     public void add(E value) {
 
@@ -13,8 +25,12 @@ public class TreeImpl<E extends Comparable<? super E>> implements Tree<E> {
         }
         Node<E> current = rootNode;
         Node<E> previous = null;
+        CURRENT_DEPTH = 1;
+
         while (current != null) {
+
             previous=current;
+            if (++CURRENT_DEPTH == MAX_DEPTH) break;
             if ( current.shouldBeLeftChild(value)) {
                 current = current.getLeftChild();
             } else {
@@ -22,12 +38,12 @@ public class TreeImpl<E extends Comparable<? super E>> implements Tree<E> {
             }
         }
 
-        if (previous.shouldBeLeftChild(value)) {
-            previous.setLeftChild(newNode);
-        }
-        else {
-            previous.setRightChild(newNode);
-        }
+
+            if (previous.shouldBeLeftChild(value)) {
+                previous.setLeftChild(newNode);
+            } else {
+                previous.setRightChild(newNode);
+            }
 
 
     }
