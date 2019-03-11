@@ -1,3 +1,4 @@
+import java.sql.Statement;
 import java.util.*;
 import java.util.stream.Stream;
 
@@ -87,10 +88,11 @@ public class Graph {
 
     /**
      * англ. Depth-first search, DFS
+     *
      * @param startLabel
      */
     public void dfs(String startLabel) {
-        if ( !find(startLabel) ) {
+        if (!find(startLabel)) {
             throw new IllegalArgumentException("Invalid startLabel: " + startLabel);
         }
 
@@ -99,7 +101,7 @@ public class Graph {
         Vertex vertex = vertices.get(indexOf(startLabel));
         visitVertex(stack, vertex);
 
-        while ( !stack.isEmpty() ) {
+        while (!stack.isEmpty()) {
             vertex = getNearUnvisitedVertex(stack.peek());
             if (vertex == null) {
                 stack.pop();
@@ -117,10 +119,11 @@ public class Graph {
 
     /**
      * англ. breadth-first search, BFS
+     *
      * @param startLabel
      */
     public void bfs(String startLabel) {
-        if ( !find(startLabel) ) {
+        if (!find(startLabel)) {
             throw new IllegalArgumentException("Invalid startLabel: " + startLabel);
         }
 
@@ -129,7 +132,7 @@ public class Graph {
         Vertex vertex = vertices.get(indexOf(startLabel));
         visitVertex(queue, vertex);
 
-        while ( !queue.isEmpty()) {
+        while (!queue.isEmpty()) {
             vertex = getNearUnvisitedVertex(queue.peek());
             if (vertex == null) {
                 queue.remove();
@@ -156,6 +159,7 @@ public class Graph {
         stack.push(vertex);
         vertex.markAsVisited();
     }
+
     private void visitVertex(Queue<Vertex> stack, Vertex vertex) {
         displayVertex(vertex);
         stack.add(vertex);
@@ -167,4 +171,41 @@ public class Graph {
     }
 
 
+    protected Stack<String> shortestPath(String firstLabel, String lastLabel) {
+        int firstIndex = indexOf(firstLabel);
+        int lastIndex = indexOf(lastLabel);
+        if (firstIndex == -1) {
+            throw new IllegalArgumentException("Invalid firstLabel: " + firstLabel);
+        }
+        if (lastIndex == -1) {
+            throw new IllegalArgumentException("Invalid lastLabel: " + lastLabel);
+        }
+        Queue<Vertex> queue = new ArrayDeque<>();
+        Vertex vertex = vertices.get(firstIndex);
+        visitVertex(queue, vertex);
+
+        Stack<String> stack = null;
+        while (!queue.isEmpty()) {
+            vertex = getNearUnvisitedVertex(queue.peek());
+            if (vertex == null) {
+                queue.remove();
+            } else {
+                visitVertex(queue, vertex);
+                vertex.setPreviousVertex(queue.peek());
+                if (vertex.getLabel().equals(lastLabel)) {
+                    stack = new Stack<>();
+                    Vertex current = vertex;
+                    while (current != null) {
+                        stack.push(current.getLabel());
+                        current = current.getPreviousVertex();
+                    }
+                }
+            }
+
+
+
+        }resetVertexState();
+
+        return stack;
+    }
 }
