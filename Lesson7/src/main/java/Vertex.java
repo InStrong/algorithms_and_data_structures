@@ -2,6 +2,16 @@ import java.util.Objects;
 
 public class Vertex {
 
+    private Vertex previousVertex;
+
+    public Vertex getPreviousVertex() {
+        return previousVertex;
+    }
+
+    public void setPreviousVertex(Vertex previousVertex) {
+        this.previousVertex = previousVertex;
+    }
+
     private final String label;
     private boolean wasVisited;
 
@@ -45,6 +55,7 @@ public class Vertex {
 
     public void resetState() {
         this.wasVisited = false;
+        this.previousVertex = null;
 
     }
 
